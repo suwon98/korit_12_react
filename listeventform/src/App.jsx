@@ -1,4 +1,4 @@
-
+import MyList from './MyList'
 import './App.css'
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      
+      <MyList></MyList>
     </>
   )
 }
