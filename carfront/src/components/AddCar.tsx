@@ -1,8 +1,10 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button } from "@mui/material";
+import { Dialog, DialogActions, DialogTitle, Button } from "@mui/material";
 import {Car} from '../types';
 import { useState } from "react";
 import { addCar } from "../api/carapi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import CarDialogContent from "./CarDialogContent";
 
 export default function AddCar () {
   const queryClient = useQueryClient();
@@ -51,20 +53,7 @@ export default function AddCar () {
       <button onClick={handleClickOpen}>New Car</button>
       <Dialog open={open} onClose={handleClickClose}>
         <DialogTitle>New Car</DialogTitle>
-        <DialogContent>
-          <TextField label='Brand' name='brand' fullWidth margin="dense" onChange={handleChange} value={car.brand} />
-          <br />
-          <TextField label='Model' name='model' fullWidth margin="dense" onChange={handleChange} value={car.model} />
-          <br />
-          <TextField label='Color' name='color' fullWidth margin="dense" onChange={handleChange} value={car.color} />
-          <br />
-          <TextField label='Reg.No' name='registrationNumber' fullWidth margin="dense" onChange={handleChange} value={car.registrationNumber} />
-          <br />
-          <TextField label='Year' name='modelYear' fullWidth margin="dense" onChange={handleChange} value={car.modelYear} />
-          <br />
-          <TextField label='Price' name='price' fullWidth margin="dense" onChange={handleChange} value={car.price} />
-          <br />
-        </DialogContent>
+        <CarDialogContent car={car} handleChange={handleChange}/>
         <DialogActions>
           <Button onClick={handleClickClose}>Cancel</Button>
           <Button onClick={handleSave}>Save</Button>
