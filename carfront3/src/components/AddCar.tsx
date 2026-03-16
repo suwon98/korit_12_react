@@ -50,7 +50,7 @@ export default function AddCar () {
 
   return (
     <>
-      <button onClick={handleClickOpen}>New Car</button>
+      <Button onClick={handleClickOpen}>New Car</Button>
       <Dialog open={open} onClose={handleClickClose}>
         <DialogTitle>New Car</DialogTitle>
         <CarDialogContent car={car} handleChange={handleChange}/>

@@ -1,5 +1,5 @@
 import { Car } from "../types";
-import { DialogContent, TextField } from "@mui/material";
+import { DialogContent, TextField, Stack } from "@mui/material";
 
 
 type DialogFormProps = {
@@ -12,18 +12,14 @@ export default function CarDialogContent ({car, handleChange} : DialogFormProps)
   return (
     <>
       <DialogContent>
-          <TextField label='Brand' name='brand' fullWidth margin="dense" onChange={handleChange} value={car.brand} />
-          <br />
-          <TextField label='Model' name='model' fullWidth margin="dense" onChange={handleChange} value={car.model} />
-          <br />
-          <TextField label='Color' name='color' fullWidth margin="dense" onChange={handleChange} value={car.color} />
-          <br />
-          <TextField label='Reg.No' name='registrationNumber' fullWidth margin="dense" onChange={handleChange} value={car.registrationNumber} />
-          <br />
-          <TextField label='Year' name='modelYear' fullWidth margin="dense" onChange={handleChange} value={car.modelYear} type="number" />
-          <br />
-          <TextField label='Price' name='price' fullWidth margin="dense" onChange={handleChange} value={car.price} type="number" />
-          <br />
+        <Stack spacing={2} mt={1}>
+          <TextField type='text' label='Brand' name='brand' fullWidth margin="dense" onChange={handleChange} value={car.brand} />
+          <TextField type='text' label='Model' name='model' fullWidth margin="dense" onChange={handleChange} value={car.model} />
+          <TextField type='text' label='Color' name='color' fullWidth margin="dense" onChange={handleChange} value={car.color} />
+          <TextField type='text' label='Reg.No' name='registrationNumber' fullWidth margin="dense" onChange={handleChange} value={car.registrationNumber} />
+          <TextField type="number" label='Year' name='modelYear' fullWidth margin="dense" onChange={handleChange} value={car.modelYear} />
+          <TextField type="number" label='Price' name='price' fullWidth margin="dense" onChange={handleChange} value={car.price} />
+        </Stack>
         </DialogContent>
     </>
   );
