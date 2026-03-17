@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Button, TextField, Stack } from "@mui/material";
+import { Button, TextField, Stack, Snackbar } from "@mui/material";
 import Carlist from "./Carlist";
 
 type User = {
@@ -13,6 +13,8 @@ export default function Login () {
     username: '',
     password: '',
   });
+
+  const [open, setOpen] = useState(false);
 
   const [isAuthenticated, setAuth] = useState(false);
 
@@ -34,25 +36,36 @@ export default function Login () {
         setAuth(true);
       }
     })
-    .catch(err => {
-      console.log('로그인 중 오류 발생 : ', err);
-    })
-  };
-
-  if (isAuthenticated) {
-    return <Carlist />;
+    .catch(() => setOpen(true)) // 일부러 err => console.err(err);에서 이렇게 바꿨습니다.
   }
-  else {
-    return (
-    <Stack spacing={2} alignItems='center' mt={2}>
-      <TextField name='username' label='Username' onChange={handleChange}></TextField>
-      <TextField name='password' label='Password' onChange={handleChange} type="password"></TextField>
-      <Button
-        variant='outlined'
-        color='primary'
-        onClick={handleLogin}
-      >LOGIN</Button>
-    </Stack>
+
+  const handleLogout = () => {
+    setAuth(false);
+    localStorage.setItem('jwt', '');
+  }
+    
+    if (isAuthenticated) {
+      return <Carlist logout={handleLogout} />;
+    }
+    else {
+      return (
+        <>
+        <Snackbar 
+          open={open}
+          autoHideDuration={3000}
+          onClose={() => setOpen(false)}
+          message='ID 혹은 비밀번호가 틀렸습니다.'
+          />
+        <Stack spacing={2} alignItems='center' mt={2}>
+          <TextField name='username' label='Username' onChange={handleChange}></TextField>
+          <TextField name='password' label='Password' onChange={handleChange} type="password"></TextField>
+          <Button
+            variant='outlined'
+            color='primary'
+            onClick={handleLogin}
+            >LOGIN</Button>
+        </Stack>
+      </>
     );
   }
 }
